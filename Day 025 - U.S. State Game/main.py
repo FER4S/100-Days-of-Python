@@ -31,10 +31,11 @@ while is_on:
         feras.home()
         feras.write('You have guessed all the states right!', align='center', font=("Courier", 20, "bold"))
     if ans == 'Exit':
-        missed = []
-        for state in states:
-            if state not in guessed:
-                missed.append(state)
+        # missed = []
+        # for state in states:
+        #     if state not in guessed:
+        #         missed.append(state)
+        missed = [state for state in states if state not in guessed]
         df = pandas.DataFrame(missed)
         df.to_csv('missed states.csv')
         break
