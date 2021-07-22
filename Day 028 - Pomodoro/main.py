@@ -17,7 +17,7 @@ timer = None
 
 
 def reset_timer():
-    btnStart.config(state="normal")
+    btn_start.config(state="normal")
     global reps
     window.after_cancel(timer)
     canvas.itemconfig(timer_text, text='00:00')
@@ -29,7 +29,7 @@ def reset_timer():
 
 
 def start_timer():
-    btnStart.config(state="disabled")
+    btn_start.config(state="disabled")
     global reps
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
@@ -80,9 +80,12 @@ lbl_timer.grid(row=0, column=1)
 lbl_tick = Label(text='', bg=YELLOW, fg=GREEN, font=(FONT_NAME, 10))
 lbl_tick.grid(row=3, column=1)
 
-btnStart = Button(text='Start', command=start_timer)
-btnStart.grid(row=2, column=0)
+btn_start = Button(text='Start', command=start_timer)
+btn_start.grid(row=2, column=0)
 
-btnReset = Button(text='Reset', command=reset_timer)
-btnReset.grid(row=2, column=2)
+btn_reset = Button(text='Reset', command=reset_timer)
+btn_reset.grid(row=2, column=2)
+
+btn_exit = Button(text='Exit', command=window.destroy)
+btn_exit.grid(row=4, column=1)
 window.mainloop()
