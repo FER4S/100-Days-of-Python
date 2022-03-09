@@ -2,7 +2,6 @@ from tkinter import *
 
 
 timer = None
-length = None
 
 
 def callback(*args):
