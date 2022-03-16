@@ -1,0 +1,38 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles %}
+    {{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+{% endblock %}
+
+{% block title %}Colour Extract Tool{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row d-flex align-items-center">
+    <div style="width: 50%;margin: auto;">
+      <h1>Colour Extract Tool</h1>
+      <hr>
+      <h2>The result:</h2>
+        <img src="/static/files/{{name}}" style="width: 100%;margin: auto;">
+        <table class="table text-center">
+            <thead>
+                <td><b>Colour</b></td>
+                <td><b>Hex</b></td>
+                <td><b>Percentage</b></td>
+            </thead>
+            {% for i in range(colours|length): %}
+            <tr>
+                <td style="background-color:{{ colours[i] }}"></td>
+                <td>{{ colours[i] }}</td>
+                <td>%{{ "%.2f"|format(values[i]) }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><a href="{{ url_for('home') }}">Return to Home Page</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
