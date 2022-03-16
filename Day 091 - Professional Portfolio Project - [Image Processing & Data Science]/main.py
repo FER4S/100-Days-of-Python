@@ -52,10 +52,10 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    my_dir = "static/files/"
-    file_list = [f for f in os.listdir(my_dir)]
-    for f in file_list:
-        os.remove(os.path.join(my_dir, f))
+    # my_dir = "static/files/"
+    # file_list = [f for f in os.listdir(my_dir)]
+    # for f in file_list:
+    #     os.remove(os.path.join(my_dir, f))
 
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -66,9 +66,9 @@ def home():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('show_result', name=filename))
+            # filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'img.png'))
+            return redirect(url_for('show_result', name='img.png'))
     return render_template('index.html')
 
 
