@@ -1,0 +1,87 @@
+*, *:before, *:after {
+	 box-sizing: border-box;
+}
+ html {
+	 font-size: 18px;
+	 line-height: 1.5;
+	 font-weight: 300;
+	 color: #333;
+	 font-family: "Nunito Sans", sans-serif;
+}
+ body {
+	 margin: 0;
+	 padding: 0;
+	 height: 100vh;
+	 background-color: #ecf0f9;
+	 background-attachment: fixed;
+}
+ img{
+    border-radius: 50%;
+    float: left;
+ }
+.large {
+     font-size: 3rem;
+}
+ .content {
+	 display: flex;
+	 margin: 0 auto;
+	 justify-content: center;
+	 align-items: center;
+	 flex-wrap: wrap;
+	 max-width: 1500px;
+}
+ p.overview {
+	 font-size: 12px;
+	 height: 200px;
+	 width: 100%;
+	 overflow: hidden;
+	 text-overflow: ellipsis;
+}
+ .heading {
+	 width: 100%;
+	 margin-left: 1rem;
+	 font-weight: 900;
+	 font-size: 1.618rem;
+	 text-transform: uppercase;
+	 letter-spacing: 0.1ch;
+	 line-height: 1;
+	 padding-bottom: 0.5em;
+	 margin-bottom: 1rem;
+	 position: relative;
+}
+
+ .heading:after {
+	 display: block;
+	 content: '';
+	 position: absolute;
+	 width: 60px;
+	 height: 4px;
+	 background: linear-gradient(135deg, #1a9be6, #1a57e6);
+	 bottom: 0;
+}
+
+.container.add {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.wins {
+    font-size: 1.5rem;
+    color: #00ff1c;
+}
+.losses {
+    font-size: 1.5rem;
+    color: #f00;
+}
+.green {
+    color: #00ff1c;
+}
+.red {
+    color: #f00;
+}
+ .card {
+	 color: inherit;
+	 margin: 1rem auto;
+	 position: relative;
+}
+
+

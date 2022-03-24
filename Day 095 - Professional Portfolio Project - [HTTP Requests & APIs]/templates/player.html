@@ -1,0 +1,75 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Player Data{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Player Profile</h1>
+    <table style="width: 50%;margin: auto;" class="table text-center">
+        <tr>
+            <td>
+                <img src="{{ player_info.avatarfull }}">
+            </td>
+            <td class="large" colspan="2" style="text-align: center;vertical-align: middle;">
+                {{ player_info.personaname }}
+            </td>
+        </tr>
+        <tr>
+            <td class="wins">{{ wl.win }} Wins</td>
+            <td class="losses">{{ wl.lose }} Losses</td>
+            <td style="font-size: 1.5rem">%{{ "%.2f"|format(wl.win / (wl.win+wl.lose) *100) }}</td>
+        </tr>
+        <tr>
+            {% for i in range(3): %}
+            <td class="card">
+            <img src="{{top_img[i]}}">
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in range(3): %}
+            <td class="large">
+            {{ top[i] }}
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+    <h2 class="heading">Recent Matches</h2>
+    <table class="table text-center">
+            <thead>
+                <td><b>Match ID</b></td>
+                <td><b>Hero</b></td>
+                <td><b>Result</b></td>
+                <td><b>K/D/A</b></td>
+                <td><b>Last Hits</b></td>
+                <td><b>GPM/XPM</b></td>
+                <td><b>Hero Damage</b></td>
+            </thead>
+            {% for i in range(recent|length): %}
+            <tr>
+                <td>{{ recent[i]["match_id"] }}</td>
+                <td><img style="border-radius: 0; width: 7%;" src="{{ img[i] }}">{{ recent_heroes[i] }}</td>
+                {% if recent[i]["player_slot"] < 128 and recent[i]["radiant_win"]: %}
+                <td class="green">Won</td>
+                {% elif recent[i]["player_slot"] >= 128 and not recent[i]["radiant_win"]: %}
+                <td class="green">Won</td>
+                {% else: %}
+                <td class="red">Lost</td>
+                {% endif %}
+                <td>{{ recent[i]["kills"] }}/{{ recent[i]["deaths"] }}/{{ recent[i]["assists"] }}</td>
+                <td>{{ recent[i]["last_hits"] }}</td>
+                <td>{{ recent[i]["gold_per_min"] }}/{{ recent[i]["xp_per_min"] }}</td>
+                <td>{{ recent[i]["hero_damage"] }}</td>
+            </tr>
+            {% endfor %}
+    </table>
+    <p><a href="{{ url_for('home') }}">Return to Home Page</a></p>
+</div>
+{% endblock %}
