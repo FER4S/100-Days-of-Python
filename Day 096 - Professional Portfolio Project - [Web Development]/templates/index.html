@@ -1,0 +1,55 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+{% include "header.html" %}
+
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+       {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+      </div>
+    </div>
+    <h1 class="heading">Items</h1>
+   {% for good in goods: %}
+  <div class="card" >
+    <div class="front" style="background-image: url({{ good.img_url }});">
+    </div>
+    <div class="back">
+      <div>
+    <div class="title">{{ good.name }} </div>
+          <p class="overview">
+            {{ good.description }}
+              <br>
+              <span style="font-weight: bold;font-size: 1.5rem;">${{ good.price }}</span>
+        </p>
+
+
+            {% if current_user.id != 1: %}
+          <form action="/payment/{{good.id}}" method="post">
+              <button class="button" type="submit" id="checkout_button">Buy 🛒</button>
+          </form>
+          {% endif %}
+          {% if current_user.id == 1: %}
+        <a href="{{ url_for('delete', id=good.id) }}" class="button delete-button">Delete</a>
+          {% endif %}
+
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+{% if current_user.id == 1: %}
+<div class="container text-center add">
+<a href="{{ url_for('add') }}" class="button">Add New Item</a>
+</div>
+{% endif %}
+
+{% include "footer.html" %}
+{% endblock %}
